@@ -28,7 +28,7 @@ def test_petname_generator_custom_words():
     Tests that the PetnameGenerator respects the words count.
     """
     generator = PetnameGenerator()
-    
+
     # 1 word (animal only)
     p1 = generator.generate(words=1)
     assert p1 in ANIMALS
@@ -86,13 +86,13 @@ def test_petname_properties(words, separator):
     """
     generator = PetnameGenerator()
     generated = generator.generate(words=words, separator=separator)
-    
+
     parts = generated.split(separator)
     assert len(parts) == words
-    
+
     # The last part should be an animal
     assert parts[-1] in ANIMALS
-    
+
     # All preceding parts should be adjectives
     if words > 1:
         for part in parts[:-1]:

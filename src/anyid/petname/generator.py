@@ -36,11 +36,11 @@ class PetnameGenerator:
             raise ValueError("words must be at least 1")
 
         parts: List[str] = []
-        
+
         # Add adjectives (words - 1)
         for _ in range(words - 1):
             parts.append(secrets.choice(ADJECTIVES))
-        
+
         # Add the final animal name
         parts.append(secrets.choice(ANIMALS))
 
