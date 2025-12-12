@@ -90,6 +90,7 @@ class UuidGenerator:
     def _generate_uuid7(self) -> _uuid.UUID:
         """
         Generates a UUIDv7.
+        Bit numbering from most significant bit (0) to least significant bit (127).
         bits 0-47: Unix timestamp in ms
         bits 48-51: version (0111)
         bits 52-63: rand_a
@@ -116,6 +117,7 @@ class UuidGenerator:
     def _generate_uuid8(self) -> _uuid.UUID:
         """
         Generates a UUIDv8.
+        Bit numbering from most significant bit (0) to least significant bit (127).
         This implementation generates 122 bits of random data.
         bits 0-47: custom_a
         bits 48-51: version (1000)
