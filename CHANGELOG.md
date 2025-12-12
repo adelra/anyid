@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/adelra/anyid/compare/v0.2.4...v0.3.0) (2025-12-11)
+
+
+### Features
+
+* Feat/petnames ([#34](https://github.com/adelra/anyid/issues/34)) ([a7016b0](https://github.com/adelra/anyid/commit/a7016b079073aaba1d5c92104709a74ba7443e2a))
+
 ## [0.2.4](https://github.com/adelra/anyid/compare/v0.2.3...v0.2.4) (2025-12-05)
 
 
