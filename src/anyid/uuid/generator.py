@@ -63,7 +63,9 @@ class UuidGenerator:
         """Generates a new Version 1 UUID."""
         return self.generate(version=1)
 
-    def uuid3(self, namespace: Union[_uuid.UUID, str], name: str) -> _uuid.UUID:
+    def uuid3(
+        self, namespace: Optional[Union[_uuid.UUID, str]], name: str
+    ) -> _uuid.UUID:
         """Generates a new Version 3 UUID."""
         return self.generate(version=3, namespace=namespace, name=name)
 
@@ -71,7 +73,9 @@ class UuidGenerator:
         """Generates a new, random Version 4 UUID."""
         return self.generate(version=4)
 
-    def uuid5(self, namespace: Union[_uuid.UUID, str], name: str) -> _uuid.UUID:
+    def uuid5(
+        self, namespace: Optional[Union[_uuid.UUID, str]], name: str
+    ) -> _uuid.UUID:
         """Generates a new Version 5 UUID."""
         return self.generate(version=5, namespace=namespace, name=name)
 
@@ -163,7 +167,7 @@ def uuid1() -> _uuid.UUID:
     return _uuid_generator.uuid1()
 
 
-def uuid3(namespace: Union[_uuid.UUID, str], name: str) -> _uuid.UUID:
+def uuid3(namespace: Optional[Union[_uuid.UUID, str]], name: str) -> _uuid.UUID:
     """
     Generates a new Version 3 UUID.
     """
@@ -177,7 +181,7 @@ def uuid4() -> _uuid.UUID:
     return _uuid_generator.uuid4()
 
 
-def uuid5(namespace: Union[_uuid.UUID, str], name: str) -> _uuid.UUID:
+def uuid5(namespace: Optional[Union[_uuid.UUID, str]], name: str) -> _uuid.UUID:
     """
     Generates a new Version 5 UUID.
     """

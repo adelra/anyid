@@ -83,6 +83,18 @@ def test_string_namespace():
     assert uuid5(namespace_str, name) == uuid5(namespace_uuid, name)
 
 
+def test_none_namespace():
+    """
+    Tests that passing None as namespace uses the default DNS namespace.
+    """
+    name = "example.com"
+    namespace_dns = _uuid.NAMESPACE_DNS
+
+    # Test with None explicitly passed
+    assert uuid3(None, name) == uuid3(namespace_dns, name)
+    assert uuid5(None, name) == uuid5(namespace_dns, name)
+
+
 def test_invalid_version():
     """
     Tests that an invalid version raises a ValueError.
@@ -100,6 +112,14 @@ def test_missing_name():
 
     with pytest.raises(ValueError, match="name is required"):
         uuid(version=5)
+
+    # Test convenience functions
+    namespace = _uuid.NAMESPACE_DNS
+    with pytest.raises(TypeError):
+        uuid3(namespace)
+
+    with pytest.raises(TypeError):
+        uuid5(namespace)
 
 
 def test_missing_namespace():
