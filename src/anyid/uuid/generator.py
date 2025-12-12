@@ -183,7 +183,7 @@ def uuid4() -> _uuid.UUID:
     return _uuid_generator.uuid4()
 
 
-def uuid5(namespace: Optional[Union[_uuid.UUID, str]], name: str) -> _uuid.UUID:
+def uuid5(namespace: Union[_uuid.UUID, str], name: str) -> _uuid.UUID:
     """
     Generates a new Version 5 UUID.
     """
