@@ -1,6 +1,8 @@
-import uuid
+import uuid as _uuid
+import time
+import pytest
 
-from anyid.uuid import UuidGenerator
+from anyid.uuid import UuidGenerator, uuid, uuid1, uuid3, uuid4, uuid5, uuid7, uuid8
 
 
 def test_uuid_generator():
@@ -9,4 +11,148 @@ def test_uuid_generator():
     """
     generator = UuidGenerator()
     generated_uuid = generator.generate()
-    assert isinstance(generated_uuid, uuid.UUID)
+    assert isinstance(generated_uuid, _uuid.UUID)
+    assert generated_uuid.version == 4
+
+
+def test_uuid_versions():
+    """
+    Tests that the uuid function returns a valid UUID for each version.
+    """
+    assert uuid(version=1).version == 1
+    assert uuid(version=4).version == 4
+
+    namespace = _uuid.NAMESPACE_DNS
+    name = "example.com"
+    assert uuid(version=3, namespace=namespace, name=name).version == 3
+    assert uuid(version=5, namespace=namespace, name=name).version == 5
+
+    assert uuid(version=7).version == 7
+    assert uuid(version=8).version == 8
+
+
+def test_uuid_convenience_functions():
+    """
+    Tests the convenience functions for each UUID version.
+    """
+    assert uuid1().version == 1
+    assert uuid4().version == 4
+
+    namespace = _uuid.NAMESPACE_DNS
+    name = "example.com"
+    assert uuid3(namespace, name).version == 3
+    assert uuid5(namespace, name).version == 5
+
+    assert uuid7().version == 7
+    assert uuid8().version == 8
+
+
+def test_uuid_collision():
+    """
+    Tests for UUID collisions.
+    """
+    generator = UuidGenerator()
+    ids = [generator.generate() for _ in range(10000)]
+    assert len(ids) == len(set(ids))
+
+
+def test_name_based_uuids():
+    """
+    Tests that name-based UUIDs (v3 and v5) are consistent.
+    """
+    namespace = _uuid.NAMESPACE_DNS
+    name = "example.com"
+    uuid_v3_1 = uuid3(namespace, name)
+    uuid_v3_2 = uuid3(namespace, name)
+    assert uuid_v3_1 == uuid_v3_2
+
+    uuid_v5_1 = uuid5(namespace, name)
+    uuid_v5_2 = uuid5(namespace, name)
+    assert uuid_v5_1 == uuid_v5_2
+
+
+def test_string_namespace():
+    """
+    Tests that a string namespace works for v3/v5.
+    """
+    namespace_uuid = _uuid.NAMESPACE_DNS
+    namespace_str = str(namespace_uuid)
+    name = "example.com"
+
+    assert uuid3(namespace_str, name) == uuid3(namespace_uuid, name)
+    assert uuid5(namespace_str, name) == uuid5(namespace_uuid, name)
+
+
+def test_none_namespace():
+    """
+    Tests that passing None as namespace uses the default DNS namespace.
+    """
+    name = "example.com"
+    namespace_dns = _uuid.NAMESPACE_DNS
+
+    # Test with None explicitly passed
+    assert uuid3(None, name) == uuid3(namespace_dns, name)
+    assert uuid5(None, name) == uuid5(namespace_dns, name)
+
+
+def test_invalid_version():
+    """
+    Tests that an invalid version raises a ValueError.
+    """
+    with pytest.raises(ValueError, match="Unsupported UUID version"):
+        uuid(version=2)
+
+
+def test_missing_name():
+    """
+    Tests that a missing name for v3/v5 raises a ValueError.
+    """
+    with pytest.raises(ValueError, match="name is required"):
+        uuid(version=3)
+
+    with pytest.raises(ValueError, match="name is required"):
+        uuid(version=5)
+
+    # Test convenience functions
+    namespace = _uuid.NAMESPACE_DNS
+    with pytest.raises(TypeError):
+        uuid3(namespace)
+
+    with pytest.raises(TypeError):
+        uuid5(namespace)
+
+
+def test_missing_namespace():
+    """
+    Tests that a missing namespace for v3/v5 raises a TypeError.
+    """
+    name = "example.com"
+    with pytest.raises(TypeError):
+        uuid3(name=name)
+
+    with pytest.raises(TypeError):
+        uuid5(name=name)
+
+
+def test_uuid7_timestamp():
+    """
+    Tests that UUIDv7 contains a correct timestamp.
+    """
+    u = uuid7()
+    # Extract timestamp (top 48 bits)
+    ts = u.int >> 80
+    now = int(time.time() * 1000)
+    # Allow 5 seconds tolerance (in case of slow test execution or clock skew)
+    assert abs(ts - now) < 5000
+    assert u.variant == _uuid.RFC_4122
+
+
+def test_uuid8_randomness():
+    """
+    Tests that UUIDv8 is generated and random.
+    """
+    u1 = uuid8()
+    u2 = uuid8()
+    assert u1 != u2
+    assert u1.version == 8
+    assert u1.variant == _uuid.RFC_4122
