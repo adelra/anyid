@@ -169,7 +169,7 @@ def uuid1() -> _uuid.UUID:
     return _uuid_generator.uuid1()
 
 
-def uuid3(namespace: Optional[Union[_uuid.UUID, str]], name: str) -> _uuid.UUID:
+def uuid3(namespace: Union[_uuid.UUID, str], name: str) -> _uuid.UUID:
     """
     Generates a new Version 3 UUID.
     """
