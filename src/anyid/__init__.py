@@ -3,6 +3,7 @@ from .cuid2 import cuid2
 from .ksuid import ksuid
 from .nanoid import nanoid
 from .petname import petname
+from .random_sequence import random_sequence
 from .snowflake import setup_snowflake_id_generator, snowflake
 from .ulid import ulid
 from .uuid import uuid
@@ -14,6 +15,7 @@ __all__ = [
     "ksuid",
     "nanoid",
     "petname",
+    "random_sequence",
     "snowflake",
     "setup_snowflake_id_generator",
     "ulid",
