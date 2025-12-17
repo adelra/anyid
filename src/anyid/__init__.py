@@ -1,5 +1,6 @@
 from .cuid import cuid
 from .cuid2 import cuid2
+from .crypto_random import crypto_random
 from .ksuid import ksuid
 from .nanoid import nanoid
 from .petname import petname
@@ -11,6 +12,7 @@ from .xid import xid
 __all__ = [
     "cuid",
     "cuid2",
+    "crypto_random",
     "ksuid",
     "nanoid",
     "petname",
