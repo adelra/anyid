@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/adelra/anyid/compare/v0.4.0...v0.5.0) (2025-12-28)
+
+
+### Features
+
+* add haikunator ([#39](https://github.com/adelra/anyid/issues/39)) ([63c9ceb](https://github.com/adelra/anyid/commit/63c9cebb01762bad2df06e633d65e885d9463764))
+
 ## [0.4.0](https://github.com/adelra/anyid/compare/v0.3.1...v0.4.0) (2025-12-17)
 
 
