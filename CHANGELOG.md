@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.0](https://github.com/adelra/anyid/compare/v0.3.1...v0.4.0) (2025-12-17)
+
+
+### Features
+
+* add crypto_secret ([#37](https://github.com/adelra/anyid/issues/37)) ([a735f94](https://github.com/adelra/anyid/commit/a735f94b0d2b5c6386c268d7f488bd832bf6cad3))
+
+## [0.3.1](https://github.com/adelra/anyid/compare/v0.3.0...v0.3.1) (2025-12-17)
+
+
+### Features
+
+* add more uuids ([#35](https://github.com/adelra/anyid/issues/35)) ([d54e7b5](https://github.com/adelra/anyid/commit/d54e7b5a1b56ab3b72c4761135e6b284cb817a8e))
+
 ## [0.3.0](https://github.com/adelra/anyid/compare/v0.2.4...v0.3.0) (2025-12-11)
 
 
